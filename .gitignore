@@ -38,3 +38,6 @@ out/
 
 ### Secrets ###
 application.properties
+
+### FrontEnd
+/node_modules/

@@ -1,0 +1,589 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'tailwindcss';
+/* 🔥 Files */
+.pfile {
+  position: absolute;
+  bottom: 25px;
+  width: 40px;
+  height: 50px;
+
+  /* ✨ NEW THEME COLORS */
+  background: linear-gradient(
+    135deg,
+    rgba(34, 211, 238, 0.9),   /* cyan */
+    rgba(99, 102, 241, 0.9)    /* indigo */
+  );
+
+  border-radius: 6px;
+  transform-origin: center;
+
+  animation: flyRight 3s ease-in-out infinite;
+  opacity: 0;
+
+  /* glow */
+  box-shadow:
+    0 0 10px rgba(34, 211, 238, 0.6),
+    0 0 20px rgba(99, 102, 241, 0.4);
+}
+
+/* inner lines */
+.pfile::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 28px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
+}
+
+.pfile::after {
+  content: "";
+  position: absolute;
+  top: 13px;
+  left: 6px;
+  width: 18px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 2px;
+}
+
+/* animation */
+@keyframes flyRight {
+  0% {
+    left: -10%;
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    left: 45%;
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.pfile {
+  animation-delay: calc(var(--i) * 0.5s);
+}
+
+/* 🔥 FIXED EVA LOADER */
+
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.modelViewPort {
+  /* The black circle background around the model*/
+  perspective: 800px;
+  width: 14rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  overflow: hidden;
+}
+.eva {
+  --EVA-ROTATION-DURATION: 4s;
+  transform-style: preserve-3d;
+  animation: rotateRight var(--EVA-ROTATION-DURATION) linear infinite alternate;
+}
+.head {
+  position: relative;
+  width: 6rem;
+  height: 4rem;
+  border-radius: 48% 53% 45% 55% / 79% 79% 20% 22%;
+  background: linear-gradient(to right, white 45%, gray);
+}
+.eyeChamber {
+  width: 4.5rem;
+  height: 2.75rem;
+  position: relative;
+  left: 50%;
+  top: 55%;
+  border-radius: 45% 53% 45% 48% / 62% 59% 35% 34%;
+  background-color: #0c203c;
+  box-shadow: 0px 0px 2px 2px white, inset 0px 0px 0px 2px black;
+  transform: translate(-50%, -50%);
+  animation: moveRight var(--EVA-ROTATION-DURATION) linear infinite alternate;
+}
+.eye {
+  width: 1.2rem;
+  height: 1.5rem;
+  position: absolute;
+  border-radius: 50%;
+}
+.eye:first-child {
+  left: 12px;
+  top: 50%;
+  background: repeating-linear-gradient(
+    65deg,
+    #9bdaeb 0px,
+    #9bdaeb 1px,
+    white 2px
+  );
+  box-shadow: inset 0px 0px 5px #04b8d5, 0px 0px 15px 1px #0bdaeb;
+  transform: translate(0, -50%) rotate(-65deg);
+}
+.eye:nth-child(2) {
+  right: 12px;
+  top: 50%;
+  background: repeating-linear-gradient(
+    -65deg,
+    #9bdaeb 0px,
+    #9bdaeb 1px,
+    white 2px
+  );
+  box-shadow: inset 0px 0px 5px #04b8d5, 0px 0px 15px 1px #0bdaeb;
+  transform: translate(0, -50%) rotate(65deg);
+}
+.body {
+  width: 6rem;
+  height: 8rem;
+  position: relative;
+  margin-block-start: 0.25rem;
+  border-radius: 47% 53% 45% 55% / 12% 9% 90% 88%;
+  background: linear-gradient(to right, white 35%, gray);
+}
+.hand {
+  position: absolute;
+  left: -1.5rem;
+  top: 0.75rem;
+  width: 2rem;
+  height: 5.5rem;
+  border-radius: 40%;
+  background: linear-gradient(to left, white 15%, gray);
+  box-shadow: 5px 0px 5px rgba(0, 0, 0, 0.25);
+  transform: rotateY(55deg) rotateZ(10deg);
+}
+.hand:first-child {
+  animation: compensateRotation var(--EVA-ROTATION-DURATION) linear infinite
+    alternate;
+}
+.hand:nth-child(2) {
+  left: 92%;
+  background: linear-gradient(to right, white 15%, gray);
+  transform: rotateY(55deg) rotateZ(-10deg);
+  animation: compensateRotationRight var(--EVA-ROTATION-DURATION) linear
+    infinite alternate;
+}
+.scannerThing {
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 60%;
+  top: 10%;
+  border-top: 180px solid #9bdaeb;
+  border-left: 250px solid transparent;
+  border-right: 250px solid transparent;
+  transform-origin: top left;
+  mask: linear-gradient(to right, white, transparent 35%);
+  animation: glow 2s cubic-bezier(0.86, 0, 0.07, 1) infinite;
+}
+.scannerOrigin {
+  position: absolute;
+  width: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  left: 60%;
+  top: 10%;
+  background: #9bdaeb;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.5);
+  animation: moveRight var(--EVA-ROTATION-DURATION) linear infinite;
+}
+@keyframes rotateRight {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(25deg);
+  }
+}
+@keyframes moveRight {
+  from {
+    transform: translate(-50%, -50%);
+  }
+  to {
+    transform: translate(-40%, -50%);
+  }
+}
+@keyframes compensateRotation {
+  from {
+    transform: rotateY(55deg) rotateZ(10deg);
+  }
+  to {
+    transform: rotatey(30deg) rotateZ(10deg);
+  }
+}
+@keyframes compensateRotationRight {
+  from {
+    transform: rotateY(55deg) rotateZ(-10deg);
+  }
+  to {
+    transform: rotateY(70deg) rotateZ(-10deg);
+  }
+}
+@keyframes glow {
+  from {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  45% {
+    transform: rotate(-25deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* SMALL AI LOADER (theme override only, animation untouched) */
+.ai-loader {
+  --size: 0.25; /* 🔥 make small */
+  --color-one: #22d3ee;
+  --color-two: #6366f1;
+  --color-three: rgba(34, 211, 238, 0.4);
+  --color-four: rgba(99, 102, 241, 0.4);
+  --color-five: rgba(34, 211, 238, 0.2);
+}
+.thinking-loader .dot {
+  background-color: #22d3ee;
+}
+/* From Uiverse.io by adamgiebl */ 
+.dots-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.dot {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+  border-radius: 10px;
+  background-color: #b3d4fc;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.dot:last-child {
+  margin-right: 0;
+}
+
+.dot:nth-child(1) {
+  animation-delay: -0.3s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: -0.1s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.1s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    background-color: #b3d4fc;
+    box-shadow: 0 0 0 0 rgba(178, 212, 252, 0.7);
+  }
+
+  50% {
+    transform: scale(1.2);
+    background-color: #6793fb;
+    box-shadow: 0 0 0 10px rgba(178, 212, 252, 0);
+  }
+
+  100% {
+    transform: scale(0.8);
+    background-color: #b3d4fc;
+    box-shadow: 0 0 0 0 rgba(178, 212, 252, 0.7);
+  }
+}
+/* From Uiverse.io by andrew-manzyk */ 
+.loader {
+  --color-one: #ffbf48;
+  --color-two: #be4a1d;
+  --color-three: #ffbf4780;
+  --color-four: #bf4a1d80;
+  --color-five: #ffbf4740;
+  --time-animation: 2s;
+  --size: 1; /* You can change the size */
+  position: relative;
+  border-radius: 50%;
+  transform: scale(var(--size));
+  box-shadow:
+    0 0 25px 0 var(--color-three),
+    0 20px 50px 0 var(--color-four);
+  animation: colorize calc(var(--time-animation) * 3) ease-in-out infinite;
+}
+
+.loader::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border-top: solid 1px var(--color-one);
+  border-bottom: solid 1px var(--color-two);
+  background: linear-gradient(180deg, var(--color-five), var(--color-four));
+  box-shadow:
+    inset 0 10px 10px 0 var(--color-three),
+    inset 0 -10px 10px 0 var(--color-four);
+}
+
+.loader .box {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(
+    180deg,
+    var(--color-one) 30%,
+    var(--color-two) 70%
+  );
+  mask: url(#clipping);
+  -webkit-mask: url(#clipping);
+}
+
+.loader svg {
+  position: absolute;
+}
+
+.loader svg #clipping {
+  filter: contrast(15);
+  animation: roundness calc(var(--time-animation) / 2) linear infinite;
+}
+
+.loader svg #clipping polygon {
+  filter: blur(7px);
+}
+
+.loader svg #clipping polygon:nth-child(1) {
+  transform-origin: 75% 25%;
+  transform: rotate(90deg);
+}
+
+.loader svg #clipping polygon:nth-child(2) {
+  transform-origin: 50% 50%;
+  animation: rotation var(--time-animation) linear infinite reverse;
+}
+
+.loader svg #clipping polygon:nth-child(3) {
+  transform-origin: 50% 60%;
+  animation: rotation var(--time-animation) linear infinite;
+  animation-delay: calc(var(--time-animation) / -3);
+}
+
+.loader svg #clipping polygon:nth-child(4) {
+  transform-origin: 40% 40%;
+  animation: rotation var(--time-animation) linear infinite reverse;
+}
+
+.loader svg #clipping polygon:nth-child(5) {
+  transform-origin: 40% 40%;
+  animation: rotation var(--time-animation) linear infinite reverse;
+  animation-delay: calc(var(--time-animation) / -2);
+}
+
+.loader svg #clipping polygon:nth-child(6) {
+  transform-origin: 60% 40%;
+  animation: rotation var(--time-animation) linear infinite;
+}
+
+.loader svg #clipping polygon:nth-child(7) {
+  transform-origin: 60% 40%;
+  animation: rotation var(--time-animation) linear infinite;
+  animation-delay: calc(var(--time-animation) / -1.5);
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes roundness {
+  0% {
+    filter: contrast(15);
+  }
+  20% {
+    filter: contrast(3);
+  }
+  40% {
+    filter: contrast(3);
+  }
+  60% {
+    filter: contrast(15);
+  }
+  100% {
+    filter: contrast(15);
+  }
+}
+
+@keyframes colorize {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  20% {
+    filter: hue-rotate(-30deg);
+  }
+  40% {
+    filter: hue-rotate(-60deg);
+  }
+  60% {
+    filter: hue-rotate(-90deg);
+  }
+  80% {
+    filter: hue-rotate(-45deg);
+  }
+  100% {
+    filter: hue-rotate(0deg);
+  }
+}
+/* 🔥 MODERN AI ORB LOADER (SMALL + CLEAN) */
+
+.ai-orb-loader {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  position: relative;
+
+  /* glowing gradient core */
+  background: radial-gradient(
+    circle at 30% 30%,
+    #22d3ee,
+    #6366f1 60%,
+    #0f172a
+  );
+
+  box-shadow:
+    0 0 6px rgba(34, 211, 238, 0.8),
+    0 0 12px rgba(99, 102, 241, 0.6);
+
+  animation: ai-pulse 1.8s ease-in-out infinite;
+}
+
+/* rotating energy ring */
+.ai-orb-loader::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+
+  border: 1px solid transparent;
+  border-top: 1px solid rgba(34, 211, 238, 0.8);
+  border-right: 1px solid rgba(99, 102, 241, 0.8);
+
+  animation: ai-rotate 1.2s linear infinite;
+}
+
+/* inner breathing glow */
+.ai-orb-loader::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(34, 211, 238, 0.6),
+    transparent
+  );
+
+  animation: ai-breathe 2s ease-in-out infinite;
+}
+
+/* animations */
+
+@keyframes ai-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes ai-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow:
+      0 0 6px rgba(34, 211, 238, 0.6),
+      0 0 12px rgba(99, 102, 241, 0.4);
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow:
+      0 0 10px rgba(34, 211, 238, 1),
+      0 0 18px rgba(99, 102, 241, 0.8);
+  }
+}
+
+@keyframes ai-breathe {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: not-allowed;
+  scale: 0.7;
+}
+
+.central {
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  box-shadow: 0.5em 1em 1em cyan,
+    -0.5em 0.5em 1em #22d3ee,
+    0.5em -0.5em 1em #818cf8,
+    -0.5em -0.5em 1em #06b6d4;
+}
+
+.external-shadow {
+  width: 10em;
+  height: 10em;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0.5em 0.5em 3em cyan,
+    -0.5em 0.5em 3em #22d3ee,
+    0.5em -0.5em 3em #818cf8,
+    -0.5em -0.5em 3em #06b6d4;
+  animation: rotate 3s linear infinite;
+  background-color: #0f172a;
+}
+
+.intern {
+  position: absolute;
+  color: #e2e8f0;
+  font-size: 0.9em;
+  font-weight: 600;
+  z-index: 10;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
+}

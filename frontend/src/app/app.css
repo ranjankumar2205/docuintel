@@ -1,0 +1,252 @@
+/* ========================= */
+/* 🌌 GLOBAL SCROLLBAR STYLE */
+/* ========================= */
+
+/* Width */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Thumb (main glowing part) */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(34, 211, 238, 0.6),   /* cyan */
+    rgba(99, 102, 241, 0.6)    /* indigo */
+  );
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 0 6px rgba(34, 211, 238, 0.6),
+    0 0 12px rgba(99, 102, 241, 0.4);
+
+  transition: all 0.25s ease;
+}
+
+/* Hover Glow */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(34, 211, 238, 0.9),
+    rgba(99, 102, 241, 0.9)
+  );
+
+  box-shadow:
+    0 0 10px rgba(34, 211, 238, 0.9),
+    0 0 20px rgba(99, 102, 241, 0.6);
+}
+
+/* Firefox support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(34, 211, 238, 0.6) transparent;
+}
+
+/* ========================= */
+/* ✨ SMOOTH SCROLL */
+/* ========================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ========================= */
+/* 🧊 GLASS SCROLL CONTAINER */
+/* ========================= */
+
+.scroll-glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  scrollbar-gutter: stable;
+}
+
+/* ========================= */
+/* 🌟 EDGE GLOW EFFECT */
+/* ========================= */
+
+.scroll-glow {
+  position: relative;
+}
+
+.scroll-glow::before,
+.scroll-glow::after {
+  content: '';
+  position: sticky;
+  left: 0;
+  right: 0;
+  height: 14px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Top glow */
+.scroll-glow::before {
+  top: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 23, 42, 0.9),
+    transparent
+  );
+}
+
+/* Bottom glow */
+.scroll-glow::after {
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    rgba(15, 23, 42, 0.9),
+    transparent
+  );
+}
+
+/* ========================= */
+/* 🌈 OPTIONAL: HOVER FADE-IN SCROLLBAR */
+/* ========================= */
+
+.scroll-hover::-webkit-scrollbar-thumb {
+  opacity: 0.3;
+}
+
+.scroll-hover:hover::-webkit-scrollbar-thumb {
+  opacity: 1;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(20px, -20px); }
+  100% { transform: translate(0, 0); }
+}
+
+.orb-animate {
+  animation: floatOrb 12s ease-in-out infinite;
+}
+/* 🌌 Loader Container */
+.loader-con {
+  position: relative;
+  width: 200px;
+  height: 100px;
+
+  /* 🔥 ADD THIS */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 🔥 Files */
+.pfile {
+  position: absolute;
+  bottom: 25px;
+  width: 40px;
+  height: 50px;
+
+  /* ✨ NEW THEME COLORS */
+  background: linear-gradient(
+    135deg,
+    rgba(34, 211, 238, 0.9),   /* cyan */
+    rgba(99, 102, 241, 0.9)    /* indigo */
+  );
+
+  border-radius: 6px;
+  transform-origin: center;
+
+  animation: flyRight 3s ease-in-out infinite;
+  opacity: 0;
+
+  /* glow */
+  box-shadow:
+    0 0 10px rgba(34, 211, 238, 0.6),
+    0 0 20px rgba(99, 102, 241, 0.4);
+}
+
+/* inner lines */
+.pfile::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 28px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
+}
+
+.pfile::after {
+  content: "";
+  position: absolute;
+  top: 13px;
+  left: 6px;
+  width: 18px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 2px;
+}
+
+/* animation */
+@keyframes flyRight {
+  0% {
+    left: -10%;
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    left: 45%;
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.pfile {
+  animation-delay: calc(var(--i) * 0.5s);
+}
+.modelViewPort {
+  background: radial-gradient(
+    circle,
+    rgba(15, 23, 42, 1),
+    rgba(2, 6, 23, 1)
+  );
+}
+
+/* Glow upgrade */
+.eye {
+  box-shadow:
+    inset 0 0 5px #22d3ee,
+    0 0 12px #22d3ee;
+}
+
+/* Scanner beam */
+.scannerThing {
+  border-top: 180px solid rgba(34, 211, 238, 0.5);
+}
+
+/* scanner dot */
+.scannerOrigin {
+  background: #22d3ee;
+}
+.drag-active {
+  box-shadow:
+    0 0 20px rgba(34, 211, 238, 0.5),
+    inset 0 0 20px rgba(34, 211, 238, 0.2);
+}
+/* 🔒 Disabled Tab Style */
+.tab-disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none; /* 🔥 blocks clicks completely */
+  filter: grayscale(30%);
+}
+
+/* Optional: subtle fade animation */
+.tab-disabled {
+  transition: all 0.2s ease-in-out;
+}
